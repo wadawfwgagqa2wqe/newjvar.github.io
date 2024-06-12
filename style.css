@@ -1,0 +1,415 @@
+@font-face {
+  font-family: 'Monocraft';
+  src: url("fonts/Monocraft.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background-color: rgb(20, 20, 20);
+  margin: 0px;
+}
+
+#menu {  
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+#menu-items {
+  margin-left: 8%;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+#menu[data-active-index="0"] > #menu-background-pattern {
+  background-position: 0% -20%;
+}
+
+#menu[data-active-index="1"] > #menu-background-pattern {
+  background-position: 0% -40%;
+}
+
+#menu[data-active-index="2"] > #menu-background-pattern {
+  background-position: 0% -60%;
+}
+
+#menu[data-active-index="3"] > #menu-background-pattern {
+  background-position: 0% -80%;
+}
+
+#menu[data-active-index="4"] > #menu-background-pattern {
+  background-position: 0% -100%;
+}
+
+#menu[data-active-index="0"] > #menu-background-image {
+  background-position: 0% 45%;
+}
+
+#menu[data-active-index="1"] > #menu-background-image {
+  background-position: 0% 50%;
+}
+
+#menu[data-active-index="2"] > #menu-background-image {
+  background-position: 0% 55%;
+}
+
+#menu[data-active-index="3"] > #menu-background-image {
+  background-position: 0% 60%;
+}
+
+#menu[data-active-index="4"] > #menu-background-image {
+  background-position: 0% 65%;
+}
+
+#menu-background-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.1) 9%, 
+    transparent 9%
+  );
+  opacity: 0.1;
+  background-position: 0% 0%;
+  background-size: 12vmin 12vmin;
+  height: 100vh;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  transition: opacity 800ms ease, 
+    background-size 800ms ease,
+    background-position 800ms ease;
+  width: 100vw;
+  z-index: 0;
+}
+
+#menu-background-image {
+  background-image: url("images/background.png");
+  background-position: center 40%;
+  background-size: cover;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  transition: opacity 800ms ease,
+    background-size 800ms ease,
+    background-position 800ms ease;
+  width: 100%;
+  z-index: -1;
+  filter: blur(4px);
+}
+
+#menu-items:hover ~ #menu-background-pattern {
+  opacity: 0.5;
+}
+
+#menu-items:hover ~ #menu-background-image {
+  opacity: 0.1;
+}
+
+.menu-item:not(.comingSoon) {
+  opacity: 0.8;
+  animation: lowerText 0.3s forwards;
+}
+
+.menu-item:not(.comingSoon):hover {
+  opacity: 1; 
+  animation: raiseText 0.3s forwards;
+}
+
+.menu-item {
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-family: 'Monocraft';
+  font-size: clamp(2rem, 6vw, 6rem);
+  padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
+  text-decoration: none;
+  transition: opacity 400ms ease;
+  transition: left 0.5s ease;
+  z-index: 3;
+  text-shadow: 6px 8px 4px rgba(0, 0, 0, 0.35);
+}
+
+.comingSoon {
+  color: rgba(155, 155, 155, 0.2);
+  cursor: default;
+}
+
+.fade {
+  font-size: clamp(1rem, 3vw, 3rem);
+  transition: opacity 700ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+#aboutPage {
+  display: flex;
+  z-index: 1;
+  width: 100%;
+  justify-content: center;
+  user-select: none;
+}
+
+#aboutPageBackButton {
+  position: fixed;
+  display: flex;
+  top: -140px;
+  left: 0;
+  border-radius: 0;
+  border-bottom-right-radius: 20px;
+  backdrop-filter: brightness(200%);
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: all 500ms ease-in-out;
+}
+
+#aboutPageBackButton:hover { 
+  top: -130px;
+  left: -10px;
+}
+
+#aboutPageBackButton:hover a {
+  transform: scale(1.05, 1.05);
+  margin-left: 40px;
+}
+
+#aboutPageBackButton a {
+  margin: 48px 15px 10px 12px;
+  font-family: 'Monocraft';
+  font-size: x-large;
+  transition: all 0.5s ease-in-out;
+}
+
+.expanded {
+  position: absolute;
+  width: 1200px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -45vh;
+}
+
+.glass {
+  box-shadow: 6px 8px 4px rgba(0, 0, 0, 0.35);
+  border-radius: 20px;
+  user-select: none;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(7px);
+}
+
+.card {
+  width: 225px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 50px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  left: 100vw;
+  bottom: -15vh;
+}
+
+.cardTitle {
+  padding-top: 5px;
+  transition-property: opacity, transform;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  opacity: 0;
+  position: absolute;
+  bottom: 150vh;
+}
+
+.aboutDiv1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(255,255,255,0.5);
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.aboutDiv2 {
+  position: absolute;
+  left: 0;
+  top: 35px;
+  margin: 10px;
+  background-color: rgba(255,255,255,0.3);
+  padding: 15px;
+  padding-top: 0;
+  border-radius: 15px;
+  height: calc(100% - 55px);
+  text-shadow:1px 1.5px 3px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cardTitle a {
+  font-family: 'Monocraft';
+  font-size: x-large;
+  margin-inline: 15px;
+  margin-bottom: 10px;
+}
+
+.visCardTitle {
+  font-family: 'Monocraft';
+  font-size: larger;
+  padding-top: 5px;
+  transition-property: opacity, transform;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
+.character {
+  width: 300px;
+  height: 400px;
+  transition: all 0.5s;
+  position: absolute;
+  top: 25px;
+  z-index: -1;
+}
+.clicked {
+  cursor: default;
+}
+.card:not(.clicked):not(.wait):hover .character {
+  transform: translate(0, -20px) scaleX(1.05) scaleY(1.1);
+}
+
+.card:not(.clicked):not(.wait):hover .visCardTitle {
+  transform: translate(0, -10px);
+  transition-duration: 0.30s;
+  opacity: 0;
+}
+
+.card:not(.clicked):not(.wait):hover {
+  height: 300px;
+  transform: translate(0, -50px);
+}
+
+.card:is(.clicked) .visCardTitle {
+  opacity: 0;
+} 
+
+.card:is(.clicked) .character {
+  transform: translate(0, -15px);
+}
+
+.innerCard {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes bounce{
+  20% {
+      translate: 20px;
+  }
+  100% {
+      translate: -100vw;
+  }
+}
+
+@keyframes glide{
+  20% {
+    translate: -15vw;
+  } 
+  100% {
+    translate: -100vw;
+  }
+}
+
+@keyframes arrow {
+  20% {
+    transform: translate(0, 40px);
+  }
+  100% {
+    transform: translate(0, 100px);
+  }
+}
+
+@keyframes bounceBack{
+  0% {
+    translate: -100vw;
+  }
+  80% {
+      translate: 20px;
+  }
+  100% {
+      translate: 0vw;
+  }
+}
+
+@keyframes glideBack{
+  0% {
+    translate: -100vw;
+  }
+  30% {
+    translate: -101vw;
+  } 
+  100% {
+    translate: 0vw;
+  }
+}
+
+@keyframes arrowBack {
+  0% {
+    transform: translate(0, 100px);
+  }
+  30% {
+    transform: translate(0, 110px);
+  }
+  100% {
+    transform: translate(0, 0px);
+  }
+}
+
+@keyframes raiseText {
+  0% {
+      transform: scale(1) translateY(0);
+      text-shadow: 6px 8px 4px rgba(0, 0, 0, 1);
+  }
+  100% {
+      transform: scale(1.025) translateY(5px);
+      text-shadow: 10px 12px 6px rgba(0, 0, 0, 1);
+  }
+}
+
+@keyframes lowerText {
+  0% {
+      transform: scale(1.025) translateY(5px);
+      text-shadow: 10px 12px 6px rgba(0, 0, 0, 1);
+  }  
+  100% {
+      transform: scale(1) translateY(0);
+      text-shadow: 6px 8px 4px rgba(0, 0, 0, 1);
+  }
+}
+
+.glide-animation {
+  animation: glide 2s ease-in-out forwards;
+}
+
+.bounce-animation {
+  animation: bounce 3s ease-in-out forwards;
+}
+
+.arrow-animation {
+  animation: arrow 1s ease-in-out forwards;
+}
+
+.glideBack-animation {
+  animation: glideBack 2s ease-in-out forwards;
+}
+
+.bounceBack-animation {
+  animation: bounceBack 3s ease-in-out forwards;
+}
+
+.arrowBack-animation {
+  animation: arrowBack 1s ease-in-out forwards;
+}
